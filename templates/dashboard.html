@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Dashboard de Vendas</title>
+</head>
+<body>
+    <nav>
+        <span>Bem-vindo ao Sistema</span>
+        <a href="{{ url_for('logout') }}">Sair</a>
+    </nav>
+   <main>
+    <h2>Cadastrar Novo Produto</h2>
+    <form action="/adicionar" method="POST" class="form-cadastro">
+        <input type="text" name="nome" placeholder="Nome do Produto" required>
+        <input type="number" step="0.01" name="preco" placeholder="Preço (ex: 19.90)" required>
+        <input type="number" name="estoque" placeholder="Qtd em Estoque" required>
+        <button type="submit" style="background: #007bff;">Adicionar</button>
+    </form>
+
+    <hr>
+
+    <h2>Produtos em Estoque</h2>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Estoque</th>
+            <th>Ação</th>
+        </tr>
+        {% for p in produtos %}
+        <tr>
+            <td>{{ p.nome }}</td>
+            <td>R$ {{ "%.2f"|format(p.preco) }}</td>
+            <td>{{ p.estoque }}</td>
+            <td>
+                {% if p.estoque > 0 %}
+                    <a href="/vender/{{ p.id }}" class="btn-vender">Vender 1 un.</a>
+                {% else %}
+                    <span style="color: red;">Esgotado</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</main>
+</body>
+</html>

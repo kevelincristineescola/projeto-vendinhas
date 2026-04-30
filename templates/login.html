@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Login - Sistema de Vendas</title>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Entrar no Sistema</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Usuário (admin)" required>
+            <input type="password" name="password" placeholder="Senha (1234)" required>
+            <button type="submit">Acessar</button>
+        </form>
+    </div>
+</body>
+</html>
